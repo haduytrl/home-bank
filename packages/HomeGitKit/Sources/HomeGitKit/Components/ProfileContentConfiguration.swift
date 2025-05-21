@@ -21,7 +21,7 @@ struct ProfileContentConfiguration: UIContentConfiguration {
 private class ProfileContentView: UIView, UIContentView {
     private lazy var profileImageView: UIImageView = {
         let v = UIImageView()
-        v.image = UIImage(systemName: "person.circle.fill")
+        v.image = UIImage(named: "avatar")
         v.tintColor = .black
         v.layer.cornerRadius = (.getSpacing(.extraLarge1) - 4) / 2
         v.tintColor = .systemGray3
