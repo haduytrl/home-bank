@@ -31,7 +31,7 @@ private class ProfileContentView: UIView, UIContentView {
     
     private lazy var dotView: UIView = {
         let v = UIView()
-        v.backgroundColor = .systemRed
+        v.backgroundColor = .orange1
         v.layer.cornerRadius = .getCornerRadius(.xs)
         v.translatesAutoresizingMaskIntoConstraints = false
         v.isHidden = true

@@ -4,10 +4,9 @@ extension DashboardViewController {
     func makeCollectionView(didPullToRefresh: Selector) -> UICollectionView {
         let v = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         v.backgroundColor = .clear
-        v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         v.showsVerticalScrollIndicator = false
-        v.alwaysBounceVertical = true
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.contentInset.bottom = .getSpacing(.extraLarge)
         
         let rc = UIRefreshControl()
         rc.addTarget(self, action: didPullToRefresh, for: .valueChanged)
@@ -21,3 +20,4 @@ extension DashboardViewController {
         return pan
     }
 }
+

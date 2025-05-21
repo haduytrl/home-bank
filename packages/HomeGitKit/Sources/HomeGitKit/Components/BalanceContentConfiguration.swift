@@ -155,6 +155,7 @@ private extension BalanceContentView {
         btn.addAction(UIAction(handler: { [weak self] _ in
             self?.showEye.toggle()
         }), for: .touchUpInside)
+        btn.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: .getSpacing(.xssmall))
         return btn
     }
 }

@@ -99,12 +99,16 @@ extension DashboardViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .fractionalWidth(0.26))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: .getSpacing(.xlarge) * 2)
+        
+        if #available(iOS 16.0, *) {
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: .getSpacing(.xlarge), bottom: 0, trailing: .getSpacing(.xlarge))
+        } else {
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: .getSpacing(.xlarge) * 2)
+        }
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .fractionalWidth(0.26))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(.getSpacing(.xlarge))
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
