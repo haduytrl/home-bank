@@ -1,5 +1,4 @@
 import UIKit
-import Kingfisher
 
 public extension UIImageView {
     func setCachedImage(from url: URL?, placeholder: UIImage? = nil) {
