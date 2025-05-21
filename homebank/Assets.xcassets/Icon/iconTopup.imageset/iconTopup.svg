@@ -1,0 +1,19 @@
+<svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path id="58eyoomtqa" d="M0 56h56V0H0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path d="M56 28c0 15.464-12.536 28-28 28S0 43.464 0 28 12.536 0 28 0s28 12.536 28 28" fill="#6F6F6F"/>
+        <path d="M36.91 12.927a2.775 2.775 0 0 0-2.767-2.767H18.151a2.775 2.775 0 0 0-2.767 2.767v30.205a2.775 2.775 0 0 0 2.767 2.767h15.992a2.775 2.775 0 0 0 2.767-2.767V12.927z" fill="#FFF"/>
+        <mask id="qwpipe6dqb" fill="#fff">
+            <use xlink:href="#58eyoomtqa"/>
+        </mask>
+        <path fill="#DDD" mask="url(#qwpipe6dqb)" d="M17.511 41.883h17.271v-29.32h-17.27z"/>
+        <path d="M36.91 46.922c-4.507 0-8.194-3.687-8.194-8.194 0-4.507 3.687-8.195 8.194-8.195 4.507 0 8.195 3.688 8.195 8.195s-3.688 8.194-8.195 8.194" fill="#FF8861" mask="url(#qwpipe6dqb)"/>
+        <path stroke="#FFF" stroke-width="1.82" stroke-linecap="round" stroke-linejoin="round" mask="url(#qwpipe6dqb)" d="M34.184 38.728h5.452M36.91 36.002v5.452"/>
+        <path stroke="#555" stroke-width="1.422" stroke-linecap="round" stroke-linejoin="round" mask="url(#qwpipe6dqb)" d="M22.75 21.438h7"/>
+        <g mask="url(#qwpipe6dqb)" stroke="#555" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.422">
+            <path d="m24.5 26.293 1.793-1.793 1.794 1.793M26.219 24.761v5.227"/>
+        </g>
+    </g>
+</svg>
