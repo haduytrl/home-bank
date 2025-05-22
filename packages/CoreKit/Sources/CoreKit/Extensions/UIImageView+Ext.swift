@@ -14,7 +14,7 @@ public extension UIImageView {
         }
         
         // Otherwise fetch in a Task
-        Task {
+        Task.detached(priority: .utility) {
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
                 guard let img = UIImage(data: data) else { return }

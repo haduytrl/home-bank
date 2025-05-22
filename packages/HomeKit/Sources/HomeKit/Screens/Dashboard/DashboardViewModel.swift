@@ -132,10 +132,9 @@ extension DashboardViewModel {
         executeMainTask { [weak self] in
             guard let self = self else { return }
             
-            // now marked with `try`
             try await performFetchData(completion)
             
-            // All done, stop any UI spinner
+            // completion
             await MainActor.run {
                 completion()
             }

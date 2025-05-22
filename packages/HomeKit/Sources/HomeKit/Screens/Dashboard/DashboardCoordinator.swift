@@ -23,7 +23,9 @@ public final class DashboardCoordinator: Coordinator {
         self.apiClient = apiClient
     }
     
-    public func start() {
+    public func start() {}
+    
+    public var initialController: UIViewController {
         let repository = HomeRepositoryImpl(apiClient: apiClient)
         let getUSDAccountsUsecase = GetUSDAccountUsecaseImpl(repository: repository)
         let getKHRAccountsUsecase = GetKHRAccountUsecaseImpl(repository: repository)
@@ -50,7 +52,7 @@ public final class DashboardCoordinator: Coordinator {
                 }
             }.store(in: &cancellables)
         
-        navigationController.pushViewController(ctr, animated: true)
+        return ctr
     }
 }
 

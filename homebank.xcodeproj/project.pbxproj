@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5434CB7D2DDF9350000DE74E /* AccountKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5434CB7C2DDF9350000DE74E /* AccountKit */; };
+		5434CB7F2DDF9350000DE74E /* LocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5434CB7E2DDF9350000DE74E /* LocationKit */; };
+		5434CB812DDF9350000DE74E /* UserServiceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5434CB802DDF9350000DE74E /* UserServiceKit */; };
+		5434CB9D2DDFA14F000DE74E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5434CB9C2DDFA14F000DE74E /* README.md */; };
+		547596C82DDF782300F1AA71 /* HomeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 547596C72DDF782300F1AA71 /* HomeKit */; };
+		547596E72DDF8DCF00F1AA71 /* AccountKit in Resources */ = {isa = PBXBuildFile; fileRef = 547596E62DDF8DCF00F1AA71 /* AccountKit */; };
 		54FD646D2DDA105400874B53 /* CoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD646C2DDA105400874B53 /* CoreKit */; };
 		54FD646F2DDA105400874B53 /* DataKit in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD646E2DDA105400874B53 /* DataKit */; };
 		54FD64712DDA105400874B53 /* DomainRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD64702DDA105400874B53 /* DomainRepositories */; };
 		54FD64732DDA105400874B53 /* GlobalEntities in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD64722DDA105400874B53 /* GlobalEntities */; };
 		54FD64752DDA105400874B53 /* GlobalUsecase in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD64742DDA105400874B53 /* GlobalUsecase */; };
-		54FD64772DDA105400874B53 /* HomeGitKit in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD64762DDA105400874B53 /* HomeGitKit */; };
 		54FD64792DDA105400874B53 /* NetworkProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD64782DDA105400874B53 /* NetworkProvider */; };
 		54FD647B2DDA105400874B53 /* PersistentStorages in Frameworks */ = {isa = PBXBuildFile; productRef = 54FD647A2DDA105400874B53 /* PersistentStorages */; };
 /* End PBXBuildFile section */
@@ -35,13 +40,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5434CB602DDF8DF2000DE74E /* LocationKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocationKit; sourceTree = "<group>"; };
+		5434CB612DDF8DF2000DE74E /* UserServiceKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UserServiceKit; sourceTree = "<group>"; };
+		5434CB9C2DDFA14F000DE74E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		547596C62DDF77CC00F1AA71 /* HomeKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = HomeKit; sourceTree = "<group>"; };
+		547596E62DDF8DCF00F1AA71 /* AccountKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AccountKit; sourceTree = "<group>"; };
 		54A20C392DDA0F58007E1C41 /* homebank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homebank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54A20C4F2DDA0F59007E1C41 /* homebankTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homebankTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54A20C592DDA0F59007E1C41 /* homebankUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = homebankUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54FD64652DDA102A00874B53 /* CoreKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreKit; sourceTree = "<group>"; };
 		54FD64662DDA102A00874B53 /* DataKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DataKit; sourceTree = "<group>"; };
 		54FD64672DDA102A00874B53 /* DomainKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DomainKit; sourceTree = "<group>"; };
-		54FD64682DDA102A00874B53 /* HomeGitKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = HomeGitKit; sourceTree = "<group>"; };
 		54FD64692DDA102A00874B53 /* Infrastructure */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Infrastructure; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,12 +90,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				547596C82DDF782300F1AA71 /* HomeKit in Frameworks */,
+				5434CB7D2DDF9350000DE74E /* AccountKit in Frameworks */,
 				54FD64732DDA105400874B53 /* GlobalEntities in Frameworks */,
+				5434CB812DDF9350000DE74E /* UserServiceKit in Frameworks */,
 				54FD64792DDA105400874B53 /* NetworkProvider in Frameworks */,
 				54FD64712DDA105400874B53 /* DomainRepositories in Frameworks */,
 				54FD647B2DDA105400874B53 /* PersistentStorages in Frameworks */,
+				5434CB7F2DDF9350000DE74E /* LocationKit in Frameworks */,
 				54FD646D2DDA105400874B53 /* CoreKit in Frameworks */,
-				54FD64772DDA105400874B53 /* HomeGitKit in Frameworks */,
 				54FD64752DDA105400874B53 /* GlobalUsecase in Frameworks */,
 				54FD646F2DDA105400874B53 /* DataKit in Frameworks */,
 			);
@@ -112,6 +124,7 @@
 		54A20C302DDA0F58007E1C41 = {
 			isa = PBXGroup;
 			children = (
+				5434CB9C2DDFA14F000DE74E /* README.md */,
 				54FD646A2DDA102A00874B53 /* packages */,
 				54A20C3B2DDA0F58007E1C41 /* homebank */,
 				54A20C522DDA0F59007E1C41 /* homebankTests */,
@@ -138,7 +151,10 @@
 				54FD64652DDA102A00874B53 /* CoreKit */,
 				54FD64662DDA102A00874B53 /* DataKit */,
 				54FD64672DDA102A00874B53 /* DomainKit */,
-				54FD64682DDA102A00874B53 /* HomeGitKit */,
+				5434CB602DDF8DF2000DE74E /* LocationKit */,
+				5434CB612DDF8DF2000DE74E /* UserServiceKit */,
+				547596E62DDF8DCF00F1AA71 /* AccountKit */,
+				547596C62DDF77CC00F1AA71 /* HomeKit */,
 			);
 			path = packages;
 			sourceTree = "<group>";
@@ -175,9 +191,12 @@
 				54FD64702DDA105400874B53 /* DomainRepositories */,
 				54FD64722DDA105400874B53 /* GlobalEntities */,
 				54FD64742DDA105400874B53 /* GlobalUsecase */,
-				54FD64762DDA105400874B53 /* HomeGitKit */,
 				54FD64782DDA105400874B53 /* NetworkProvider */,
 				54FD647A2DDA105400874B53 /* PersistentStorages */,
+				547596C72DDF782300F1AA71 /* HomeKit */,
+				5434CB7C2DDF9350000DE74E /* AccountKit */,
+				5434CB7E2DDF9350000DE74E /* LocationKit */,
+				5434CB802DDF9350000DE74E /* UserServiceKit */,
 			);
 			productName = homebank;
 			productReference = 54A20C392DDA0F58007E1C41 /* homebank.app */;
@@ -278,6 +297,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				547596E72DDF8DCF00F1AA71 /* AccountKit in Resources */,
+				5434CB9D2DDFA14F000DE74E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +643,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5434CB7C2DDF9350000DE74E /* AccountKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AccountKit;
+		};
+		5434CB7E2DDF9350000DE74E /* LocationKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocationKit;
+		};
+		5434CB802DDF9350000DE74E /* UserServiceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UserServiceKit;
+		};
+		547596C72DDF782300F1AA71 /* HomeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HomeKit;
+		};
 		54FD646C2DDA105400874B53 /* CoreKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CoreKit;
@@ -641,10 +678,6 @@
 		54FD64742DDA105400874B53 /* GlobalUsecase */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GlobalUsecase;
-		};
-		54FD64762DDA105400874B53 /* HomeGitKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = HomeGitKit;
 		};
 		54FD64782DDA105400874B53 /* NetworkProvider */ = {
 			isa = XCSwiftPackageProductDependency;

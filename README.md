@@ -7,9 +7,10 @@ An iOS Banking application.
 
 ##** Features **#
 
+- Customize Tab Bar
 - Home Dashboard, with Pull-to-refresh
 - View Notification information
-- Auto-swipe Carousel
+- Auto-swipe Carousel Banners
 - Image caching
 - Composable Layouts / Diffable data sources
 - SPM (Swift Package Manager)
@@ -28,7 +29,7 @@ An iOS Banking application.
 ##** Requirements **##
 
 - iOS 14.0+
-- Xcode 16.2
+- Xcode 16.0+
 - Swift 5.7+
 
 ##** Testing 🧪 **##

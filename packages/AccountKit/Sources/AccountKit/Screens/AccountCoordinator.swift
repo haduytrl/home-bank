@@ -7,33 +7,27 @@ import UIKit
 import Combine
 import NetworkProvider
 
-public final class NotificationCoordinator: Coordinator {
+public final class AccountCoordinator: Coordinator {
     public var navigationController: UINavigationController
     public var parentCoordinator: Coordinator?
     public var childCoordinators: [Coordinator] = []
     
     private var cancellables = Set<AnyCancellable>()
     private let apiClient: APIClientProtocol
-    private let notifications: [NotificationModel]
     
     public init(
         navigationController: UINavigationController,
-        apiClient: APIClientProtocol,
-        notifications: [NotificationModel]
+        apiClient: APIClientProtocol
     ) {
         self.navigationController = navigationController
         self.apiClient = apiClient
-        self.notifications = notifications
     }
     
-    public func start() {
-        let repository = HomeRepositoryImpl(apiClient: apiClient)
-        let getNotificationsUsecase = GetNotificationsUsecaseImpl(repository: repository)
-        let viewModel = NotificationViewModel(context: .init(
-            notifications: notifications,
-            getNotificationsUsecase: getNotificationsUsecase
-        ))
-        let ctr = NotificationViewController(viewModel: viewModel)
+    public func start() {}
+    
+    public var initialViewController: UIViewController {
+        let viewModel = AccountViewModel(context: .init())
+        let ctr = AccountViewController(viewModel: viewModel)
         
         viewModel.outputPublisher()
             .receive(on: DispatchQueue.main)
@@ -45,6 +39,6 @@ public final class NotificationCoordinator: Coordinator {
                 }
             }.store(in: &cancellables)
         
-        navigationController.pushViewController(ctr, animated: true)
+        return ctr
     }
 }

@@ -6,7 +6,7 @@ extension DashboardViewController {
         v.backgroundColor = .clear
         v.showsVerticalScrollIndicator = false
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.contentInset.bottom = .getSpacing(.extraLarge)
+        v.contentInset.bottom = .getSpacing(.mediumLarge)
         
         let rc = UIRefreshControl()
         rc.addTarget(self, action: didPullToRefresh, for: .valueChanged)

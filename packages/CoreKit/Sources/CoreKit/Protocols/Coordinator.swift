@@ -7,6 +7,8 @@ public protocol Coordinator: AnyObject {
     
     func start()
     func finish()
+    
+    var initialViewController: UIViewController { get }
 }
 
 // MARK: - Default
@@ -14,6 +16,10 @@ public protocol Coordinator: AnyObject {
 public extension Coordinator {
     func finish() {
         parentCoordinator?.childDidFinish(self) // Self is current coordinator
+    }
+    
+    var initialViewController: UIViewController {
+        fatalError("Must override initialViewController in subclasses")
     }
 }
 

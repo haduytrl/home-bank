@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import CoreKit
 
-// MARK: - Cell Registrations
+// MARK: - Header/Footer/Cell Registrations
 extension DashboardViewController {
     func makeProfileCellRegistration() -> CellRegistration {
         return .init { cell, _, item in
