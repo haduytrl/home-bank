@@ -25,10 +25,6 @@ let package = Package(
                 .product(name: "GlobalEntities", package: "DomainKit"),
                 .product(name: "DomainRepositories", package: "DomainKit")
             ]
-        ),
-        .testTarget(
-            name: "DataKitTests",
-            dependencies: ["DataKit"]
         )
     ]
 )

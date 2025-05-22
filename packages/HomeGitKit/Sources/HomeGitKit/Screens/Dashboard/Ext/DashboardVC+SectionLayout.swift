@@ -57,9 +57,9 @@ extension DashboardViewController {
         return section
     }
     
-    func createFavouriteSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(76.0),
-                                              heightDimension: .absolute(88.0))
+    func createFavouriteSection(isEmpty: Bool) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(
             top: .getSpacing(.xsmall),
@@ -68,9 +68,18 @@ extension DashboardViewController {
             trailing: .getSpacing(.xsmall)
         )
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(76.0),
+        var groupSize = NSCollectionLayoutSize(widthDimension: .absolute(76.0),
                                                heightDimension: .absolute(88.0))
+        if isEmpty {
+            groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85),
+                                               heightDimension: .estimated(60.0))
+        }
+        
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        if isEmpty {
+            group.contentInsets = .init(top: 0, leading: .getSpacing(.xmedium), bottom: 0, trailing: 0)
+        }
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = .getSpacing(.xmedium)

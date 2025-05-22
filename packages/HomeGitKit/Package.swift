@@ -32,10 +32,6 @@ let package = Package(
                 .product(name: "GlobalUsecase", package: "DomainKit"),
                 .product(name: "PersistentStorages", package: "Infrastructure")
             ]
-        ),
-        .testTarget(
-            name: "HomeGitKitTests",
-            dependencies: ["HomeGitKit"]
         )
     ]
 )

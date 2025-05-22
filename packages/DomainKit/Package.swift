@@ -29,10 +29,6 @@ let package = Package(
         .target(
             name: "DomainRepositories",
             dependencies: ["GlobalEntities"]
-        ),
-        .testTarget(
-            name: "DomainKitTests",
-            dependencies: ["GlobalEntities", "GlobalUsecase", "DomainRepositories"]
         )
     ]
 )

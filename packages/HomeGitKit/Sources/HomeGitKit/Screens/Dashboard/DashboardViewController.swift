@@ -62,6 +62,7 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
         
         applySectionsSnapshot(with: viewModel.sections)
         makeSnapshotOfProfile(hasNotification: false)
+        makeSnapshotOfFavorites([])
     }
     
     override func setupBindViewModel() {

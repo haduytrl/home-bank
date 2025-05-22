@@ -64,6 +64,7 @@ extension DashboardViewModel {
         case productItem(_ item: ProductModel)
         case favouriteItem(_ item: FavouriteModel)
         case bannerItem(_ item: BannerModel)
+        case emptyFavourite
     }
 }
 

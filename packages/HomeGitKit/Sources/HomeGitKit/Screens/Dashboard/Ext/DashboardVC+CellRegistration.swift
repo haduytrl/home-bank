@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import CoreKit
 
 // MARK: - Cell Registrations
 extension DashboardViewController {
@@ -32,6 +33,15 @@ extension DashboardViewController {
         return .init { cell, _, item in
             guard case let .favouriteItem(favourite) = item else { return }
             cell.contentConfiguration = FavouriteContentConfiguration(favourite: favourite)
+        }
+    }
+    
+    func makeEmptyFavouriteCellRegistration() -> CellRegistration {
+        return .init { cell, _, item in
+            guard case .emptyFavourite = item else { return }
+            cell.contentConfiguration = EmptyContentConfiguration(
+                message: "You can add a favorite through the transfer or payment function."
+            )
         }
     }
     

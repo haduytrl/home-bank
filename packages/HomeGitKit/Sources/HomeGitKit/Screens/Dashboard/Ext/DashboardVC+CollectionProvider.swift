@@ -13,11 +13,12 @@ extension DashboardViewController: DiffableCollectionProvider {
     // Init data source
     func makeDataSource(for collectionView: UICollectionView) -> DataSource {
         // Create cell registrations
-        let profileRegistration = makeProfileCellRegistration()
-        let balanceRegistration = makeBalanceCellRegistration()
-        let productRegistration = makeProductCellRegistration()
-        let favouriteRegistration = makeFavouriteCellRegistration()
-        let bannerRegistration = makeBannerCellRegistration()
+        let profileRegistration        = makeProfileCellRegistration()
+        let balanceRegistration        = makeBalanceCellRegistration()
+        let productRegistration        = makeProductCellRegistration()
+        let favouriteRegistration      = makeFavouriteCellRegistration()
+        let emptyFavouriteRegistration = makeEmptyFavouriteCellRegistration()
+        let bannerRegistration         = makeBannerCellRegistration()
         
         // Create header/footer registrations
         let headerRegistration = makeTitleHeaderRegistration()
@@ -44,6 +45,8 @@ extension DashboardViewController: DiffableCollectionProvider {
                     
                 case .bannerItem:
                     cellRegistration = bannerRegistration
+                case .emptyFavourite:
+                    cellRegistration = emptyFavouriteRegistration
                 }
                 
                 return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
@@ -91,7 +94,8 @@ extension DashboardViewController: DiffableCollectionProvider {
             case .products:
                 return createProductsSection()
             case .favourite:
-                return createFavouriteSection()
+                let isEmpty = items.first == .emptyFavourite
+                return createFavouriteSection(isEmpty: isEmpty)
             case .banner:
                 return createBannerSection()
             }
@@ -130,9 +134,15 @@ extension DashboardViewController {
     }
     
     func makeSnapshotOfFavorites(_ favorites: [FavouriteModel], isAnim: Bool = true) {
-        let items: [VM.Item] = favorites.map { VM.Item.favouriteItem($0) }
         var snapshot = SectionSnapshot()
-        snapshot.append(items)
+
+        if !favorites.isEmpty {
+            let items: [VM.Item] = favorites.map { VM.Item.favouriteItem($0) }
+            snapshot.append(items)
+        } else {
+            snapshot.append([.emptyFavourite])
+        }
+        
         dataSource.apply(snapshot, to: .favourite, animatingDifferences: isAnim)
     }
     
