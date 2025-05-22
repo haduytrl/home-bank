@@ -31,6 +31,7 @@ final class AppCoordinator: Coordinator {
 // MARK: - Making tab navigation coordinator
 
 private extension AppCoordinator {
+    // HomeKit
     func makeHomeNavController() -> UINavigationController {
         let nav = UINavigationController()
         let dashboardCoordinator = DashboardCoordinator(navigationController: nav, apiClient: apiClient)
@@ -47,6 +48,7 @@ private extension AppCoordinator {
         return nav
     }
     
+    // AccountKit
     func makeAccountNavController() -> UINavigationController {
         let nav = UINavigationController()
         let accountCoordinator = AccountCoordinator(navigationController: nav, apiClient: apiClient)
@@ -62,6 +64,7 @@ private extension AppCoordinator {
         return nav
     }
     
+    // LocationKit
     func makeLocationNavController() -> UINavigationController {
         let nav = UINavigationController()
         let accountCoordinator = LocationCoordinator(navigationController: nav, apiClient: apiClient)
@@ -77,6 +80,7 @@ private extension AppCoordinator {
         return nav
     }
     
+    // UserServiceKit
     func makeUserServiceNavController() -> UINavigationController {
         let nav = UINavigationController()
         let accountCoordinator = UserServiceCoordinator(navigationController: nav, apiClient: apiClient)

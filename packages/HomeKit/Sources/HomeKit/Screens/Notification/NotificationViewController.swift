@@ -11,7 +11,7 @@ class NotificationViewController: BaseViewController<NotificationViewModel> {
     // MARK: Declare UI
     
     private lazy var backButton: UIButton = makeBackBtn(action: #selector(didTapBack))
-    private lazy var emptyLabel: UILabel = makeLabel(with: "No data available", color: .systemGray3, size: 18, weight: .bold)
+    private lazy var emptyLabel: UILabel = makeLabel(with: "No data available", color: .black.withAlphaComponent(0.5), size: 18, weight: .bold)
     private lazy var tableView: UITableView = makeTableView(didPullToRefresh: #selector(didPullToRefresh))
     
     // MARK: Life-cycle
