@@ -47,7 +47,7 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
     
     override func setupUI() {
         super.setupUI()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         // Add collection view to view hierarchy
         view.addSubview(collectionView)

@@ -66,6 +66,7 @@ private extension DashboardCoordinator {
             notifications: items
         )
         coordinator.parentCoordinator = self
+        childCoordinators.append(coordinator)
         coordinator.start()
     }
 }
