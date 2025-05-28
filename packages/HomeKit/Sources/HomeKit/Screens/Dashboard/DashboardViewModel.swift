@@ -73,11 +73,11 @@ final class DashboardViewModel: BaseViewModel {
     // Props
     private let context: Context
     private let outputSubject = PassthroughSubject<Output, Never>()
-    private(set) var sections: [Section] = [.profile, .accountBalance, .products, .favourite, .banner]
     private var accountPage: (usd: Int, khr: Int) = (1, 1)
     private var notifications = [NotificationModel]()
     
     // State
+    @Published private(set) var sections = [Section]()
     @Published private(set) var errorMessage: String?
     @Published private(set) var usdBalance: Double = 0.0
     @Published private(set) var khrBalance: Double = 0.0
@@ -87,6 +87,7 @@ final class DashboardViewModel: BaseViewModel {
     
     init(context: Context) {
         self.context = context
+        self.sections = [.profile, .accountBalance, .products, .favourite, .banner]
     }
     
     override func reset() {

@@ -57,14 +57,14 @@ final class homebankUITests: XCTestCase {
             withNormalizedOffset: CGVector(dx: 0.5, dy: 0.2)
         )
         let end = cv.coordinate(
-            withNormalizedOffset: CGVector(dx: 0.5, dy: 0.6)
+            withNormalizedOffset: CGVector(dx: 0.5, dy: 0.7)
         )
         start.press(forDuration: 0.1, thenDragTo: end)
 
         // 3) wait for the count to change
         let predicate = NSPredicate(format: "cells.count != %d", initialCount)
         expectation(for: predicate, evaluatedWith: cv, handler: nil)
-        waitForExpectations(timeout: 8)
+        waitForExpectations(timeout: 5)
 
         // 4) final assertion
         let finalCount = cv.cells.count

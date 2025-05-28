@@ -59,10 +59,6 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        applySectionsSnapshot(with: viewModel.sections)
-        makeSnapshotOfProfile(hasNotification: false)
-        makeSnapshotOfFavorites([])
     }
     
     override func setupBindViewModel() {
@@ -72,6 +68,7 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
         makeErrorMessageSubscription()
         
         // Bind sections and data
+        makeSectionsSubscription()
         makeBalanceSubscription()
         makeProductsSubscription()
         makeFavoritesSubscription()
@@ -82,6 +79,19 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
 // MARK: - Make subscription
 
 private extension DashboardViewController {
+    func makeSectionsSubscription() {
+        viewModel.$sections
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] sections in
+                guard let self else { return }
+                applySectionsSnapshot(with: sections)
+                
+                // make default snapshots (cells)
+                makeSnapshotOfProfile(hasNotification: false)
+                makeSnapshotOfFavorites([])
+            }.store(in: &cancellables)
+    }
+    
     func makeBalanceSubscription() {
         Publishers.Zip(viewModel.$usdBalance, viewModel.$khrBalance)
             .dropFirst()

@@ -8,7 +8,7 @@ extension NotificationViewController: DiffableTableProvider {
     typealias Item = ViewModel.Item
     
     func makeDataSource(for tableView: UITableView) -> DataSource {
-        return DataSource(tableView: tableView) { tableView, indexPath, item in
+        let dataSource = DataSource(tableView: tableView) { tableView, indexPath, item in
             let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
             
             switch item {
@@ -18,6 +18,8 @@ extension NotificationViewController: DiffableTableProvider {
                 return cell
             }
         }
+        dataSource.defaultRowAnimation = .fade
+        return dataSource
     }
     
     func makeSnapshotOfNotifications(_ datas: [NotificationModel]) -> Snapshot {
