@@ -18,7 +18,7 @@ final class LoggingEventMonitor: EventMonitor {
         }
         if let body = request.httpBody,
            let bodyString = String(data: body, encoding: .utf8) {
-            print("Body: \(bodyString)")
+            debugPrint("Body: \(bodyString)")
         }
         debugPrint()
         debugPrint("=====================================================")
@@ -28,18 +28,18 @@ final class LoggingEventMonitor: EventMonitor {
     func responseReceived(_ data: Data, response: URLResponse) {
         #if DEBUG
         debugPrint()
-        print("📥 =================== Network Response ==================")
+        debugPrint("📥 =================== Network Response ==================")
         debugPrint()
         if let httpResponse = response as? HTTPURLResponse {
-            print("Status Code: \(httpResponse.statusCode)")
-            print("Headers: \(httpResponse.allHeaderFields)")
+            debugPrint("Status Code: \(httpResponse.statusCode)")
+            debugPrint("Headers: \(httpResponse.allHeaderFields)")
         }
         
         if let jsonString = String(data: data, encoding: .utf8) {
-            print("Response Body: \(jsonString)")
+            debugPrint("Response Body: \(jsonString)")
         }
         debugPrint()
-        print("=====================================================\n")
+        debugPrint("=====================================================\n")
         #endif
     }
 }

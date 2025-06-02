@@ -27,11 +27,13 @@ public final class DashboardCoordinator: Coordinator {
     
     public var initialController: UIViewController {
         let repository = HomeRepositoryImpl(apiClient: apiClient)
+        
         let getUSDAccountsUsecase = GetUSDAccountUsecaseImpl(repository: repository)
         let getKHRAccountsUsecase = GetKHRAccountUsecaseImpl(repository: repository)
         let getFavouritesUsecase = GetFavouritesUsecaseImpl(repository: repository)
         let getBannersUsecase = GetBannersUsecaseImpl(repository: repository)
         let getNotificationsUsecase = GetNotificationsUsecaseImpl(repository: repository)
+        
         let viewModel = DashboardViewModel(context: .init(
             getUSDAccountsUsecase: getUSDAccountsUsecase,
             getKHRAccountsUsecase: getKHRAccountsUsecase,
