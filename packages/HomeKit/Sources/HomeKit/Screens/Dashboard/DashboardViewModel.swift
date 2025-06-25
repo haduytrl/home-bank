@@ -30,6 +30,36 @@ extension DashboardViewModel {
         }
     }
     
+    ///  PerformDataResult
+    struct PerformDataResult {
+        var usdAccounts:    [AccountModel]?
+        var khrAccounts:    [AccountModel]?
+        var favourites:     [FavouriteModel]?
+        var notifications:  [NotificationModel]?
+        
+        // Convenience balances
+        var usdBalance: Double? {
+            usdAccounts?.reduce(0) { $0 + $1.balance }
+        }
+        
+        var khrBalance: Double? {
+            khrAccounts?.reduce(0) { $0 + $1.balance }
+        }
+    }
+    // Isolated box to avoid data races
+    actor IsolatedBox {
+        private var result = PerformDataResult()
+        
+        // mutating helpers
+        func setUSD(_ accounts: [AccountModel])            { result.usdAccounts  = accounts }
+        func setKHR(_ accounts: [AccountModel])            { result.khrAccounts  = accounts }
+        func setFav(_ favs: [FavouriteModel])              { result.favourites   = favs }
+        func setNotifications(_ noti: [NotificationModel]) { result.notifications = noti }
+        
+        // read-only accessor
+        var value: PerformDataResult { result }
+    }
+    
     /// Output
     enum Output {
         case finish
@@ -133,12 +163,20 @@ extension DashboardViewModel {
         executeMainTask { [weak self] in
             guard let self = self else { return }
             
-            try await performFetchData(completion)
+            let result = try await performFetchData()
             
             // completion
             await MainActor.run {
                 completion()
             }
+            
+            try? await Task.sleep(nanoseconds: 650_000_000)
+            
+            usdBalance = result.usdBalance ?? 0
+            khrBalance = result.khrBalance ?? 0
+            favourites = result.favourites ?? []
+            notifications = result.notifications ?? []
+            
         } onError: { [weak self] error in
             guard let self = self, !Task.isCancelled else { return }
             await MainActor.run { completion() }
@@ -151,7 +189,9 @@ extension DashboardViewModel {
 // MARK: Private method
 
 private extension DashboardViewModel {
-    func performFetchData(_ completion: @escaping () -> Void) async throws {
+    func performFetchData() async throws -> PerformDataResult {
+        let box = IsolatedBox()
+        
         try await withThrowingTaskGroup(of: Void.self) { [weak self] group in
             guard let self else { return }
             
@@ -159,7 +199,7 @@ private extension DashboardViewModel {
             group.addTask {
                 do {
                     let result = try await self.context.getUSDAccountsUsecase.execute(page: self.accountPage.usd)
-                    self.usdBalance = result.reduce(0) { $0 + $1.balance }
+                    await box.setUSD(result)
                 } catch {
                     await self.handleError(error)
                 }
@@ -169,7 +209,7 @@ private extension DashboardViewModel {
             group.addTask {
                 do {
                     let result = try await self.context.getKHRAccountsUsecase.execute(page: self.accountPage.khr)
-                    self.khrBalance = result.reduce(0) { $0 + $1.balance }
+                    await box.setKHR(result)
                 } catch {
                     await self.handleError(error)
                 }
@@ -179,7 +219,7 @@ private extension DashboardViewModel {
             group.addTask {
                 do {
                     let result = try await self.context.getFavouritesUsecase.execute()
-                    self.favourites = result
+                    await box.setFav(result)
                 } catch {
                     await self.handleError(error)
                 }
@@ -192,7 +232,7 @@ private extension DashboardViewModel {
                     
                     guard !result.isEmpty else { throw APIError.mappingError }
                     
-                    self.notifications = result
+                    await box.setNotifications(result)
                 } catch {
                     await self.handleError(error)
                 }
@@ -202,9 +242,7 @@ private extension DashboardViewModel {
             try await group.waitForAll()
         }
         
-        await MainActor.run {
-            completion()
-        }
+        return await box.value
     }
     
     func fetchAllDataConcurrently() async throws {

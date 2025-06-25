@@ -153,11 +153,20 @@ extension DashboardViewController {
         section.boundarySupplementaryItems = [footer]
         
         // — Page update handler
-        section.visibleItemsInvalidationHandler = { [weak self] _, contentOffset, env in
+        section.visibleItemsInvalidationHandler = { [weak self] items, contentOffset, env in
             guard let self else { return }
             let groupWidth = env.container.effectiveContentSize.width
             let pageNo = Int(round(contentOffset.x / groupWidth))
             pageControlFooterView?.updateCurrentPage(pageNo)
+            
+            let containerMidX = contentOffset.x + groupWidth / 2
+            let maxDistance: CGFloat = 300 // tweak
+            for attr in items {
+                let distance = abs(attr.center.x - containerMidX)
+                let ratio = min(distance / maxDistance, 1)
+                let scale = 0.7 + (1 - ratio) * 0.3    // 0.7 ~ 1.0
+                attr.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }
         }
         
         return section

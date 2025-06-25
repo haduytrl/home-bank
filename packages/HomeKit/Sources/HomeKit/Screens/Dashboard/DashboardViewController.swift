@@ -7,9 +7,8 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
     // MARK: Properties
     
     private(set) lazy var dataSource: DataSource = makeDataSource(for: collectionView)
-    private var bannerTimer: Timer?
-    private var isUserInteracting: Bool = false
     private lazy var pan: UIPanGestureRecognizer = makePanGesture(action: #selector(handlePan(_:)))
+    private var bannerTimer: Timer?
     
     // MARK: Declare UI
     
@@ -160,6 +159,7 @@ private extension DashboardViewController {
 private extension DashboardViewController {
     // start auto-swipe
     func startBannerTimer() {
+        guard bannerTimer == nil else { return }
         bannerTimer = Timer.scheduledTimer(
             timeInterval: 3.0,
             target: self,
@@ -177,7 +177,7 @@ private extension DashboardViewController {
     
     // Handle auto swipe for banners
     @objc func autoSwipeBanner() {
-        guard pageControlFooterView != nil, !isUserInteracting else { return }
+        guard pageControlFooterView != nil else { return }
         
         let snapshot = dataSource.snapshot()
         
@@ -197,14 +197,18 @@ private extension DashboardViewController {
         let nextIndexPath = IndexPath(item: nextPage, section: bannerSection)
         
         // Scroll to it
-        collectionView.scrollToItem(at: nextIndexPath, at: .centeredHorizontally, animated: true)
+        collectionView.scrollToItem(at: nextIndexPath, at: .right, animated: true)
     }
     
     // Did refresh
     @objc func didPullToRefresh() {
         viewModel.performRefresh { [unowned self] in
-            collectionView.refreshControl?.endRefreshing()
-            makeSnapshotOfProfile(hasNotification: true, isAnim: false)
+            if collectionView.refreshControl?.isRefreshing == true {
+                collectionView.refreshControl?.endRefreshing()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.65) {
+                    self.makeSnapshotOfProfile(hasNotification: true, isAnim: false)
+                }
+            }
         }
     }
     
@@ -216,13 +220,12 @@ private extension DashboardViewController {
         case .began:
             // only treat it as “user interacting” if it’s a mainly horizontal swipe
             // stop auto-swipe when pan horizontal is began
-            guard abs(vel.x) > abs(vel.y), !isUserInteracting else { return }
-            isUserInteracting = true
+            guard abs(vel.x) > abs(vel.y) else { return }
             stopBannerTimer()
-        case .ended, .cancelled, .failed:
-            guard isUserInteracting else { return }
-            isUserInteracting = false
-            startBannerTimer()
+            
+        case .ended:
+            self.startBannerTimer()
+            
         default:
             break
         }
