@@ -77,19 +77,14 @@ extension NotificationViewModel {
             guard !result.isEmpty else { throw APIError.mappingError }
             
             notifications = result
-            
-            await MainActor.run {
-                completion?()
-            }
-        } onError: { [weak self] error in
+        } deferred: {
+            DispatchQueue.main.async { completion?() }
+        }
+        onError: { [weak self] error in
             guard let self, !Task.isCancelled else { return }
             notifications = []
             errorMessage = (error as? APIError)?.errorDescription
                             ?? error.localizedDescription
-            
-            await MainActor.run {
-                completion?()
-            }
         }
     }
 }

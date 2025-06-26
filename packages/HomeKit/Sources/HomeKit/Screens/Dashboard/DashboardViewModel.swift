@@ -5,7 +5,7 @@ import GlobalUsecase
 import GlobalEntities
 import NetworkProvider
 
-// MARK: - Context & Output
+// MARK: - Context & Isolated & Output
 extension DashboardViewModel {
     /// Context
     struct Context {
@@ -140,7 +140,7 @@ extension DashboardViewModel {
         executeMainTask { [weak self] in
             guard let self else { return }
             
-            // Setup default products
+            /// Setup default products
             products = [
                 ProductModel(id: "transfer", icon: "iconTransfer", title: "Transfer"),
                 ProductModel(id: "payment", icon: "iconPayment", title: "Payment"),
@@ -150,12 +150,12 @@ extension DashboardViewModel {
                 ProductModel(id: "topup", icon: "iconTopup", title: "Top up")
             ]
             
-            // Fetch all data
+            /// Fetch all data
             try await fetchAllDataConcurrently()
             
         } onError: { [weak self] error in
             guard let self, !Task.isCancelled else { return }
-            await self.handleError(error)
+            await handleError(error)
         }
     }
     
@@ -165,24 +165,19 @@ extension DashboardViewModel {
             
             let result = try await performFetchData()
             
-            // completion
-            await MainActor.run {
-                completion()
-            }
-            
+            await MainActor.run { completion() } // Stop pull-refresh first
+                     
             try? await Task.sleep(nanoseconds: 650_000_000)
             
-            usdBalance = result.usdBalance ?? 0
-            khrBalance = result.khrBalance ?? 0
-            favourites = result.favourites ?? []
-            notifications = result.notifications ?? []
-            
+            if let usd = result.usdBalance { usdBalance = usd }
+            if let khr = result.khrBalance { khrBalance = khr }
+            if let fav = result.favourites { favourites = fav }
+            if let noti = result.notifications { notifications = noti }
         } onError: { [weak self] error in
-            guard let self = self, !Task.isCancelled else { return }
+            guard let self, !Task.isCancelled else { return }
             await MainActor.run { completion() }
-            await self.handleError(error)
+            await handleError(error)
         }
-        
     }
 }
 
@@ -195,7 +190,7 @@ private extension DashboardViewModel {
         try await withThrowingTaskGroup(of: Void.self) { [weak self] group in
             guard let self else { return }
             
-            // USD accounts
+            /// USD accounts
             group.addTask {
                 do {
                     let result = try await self.context.getUSDAccountsUsecase.execute(page: self.accountPage.usd)
@@ -215,7 +210,7 @@ private extension DashboardViewModel {
                 }
             }
             
-            // Favorites
+            /// Favorites
             group.addTask {
                 do {
                     let result = try await self.context.getFavouritesUsecase.execute()
@@ -225,7 +220,7 @@ private extension DashboardViewModel {
                 }
             }
             
-            // Notification
+            /// Notification
             group.addTask {
                 do {
                     let result = try await self.context.getNotificationsUsecase.execute()
@@ -238,7 +233,7 @@ private extension DashboardViewModel {
                 }
             }
             
-            // wait for both tasks
+            /// wait for both tasks
             try await group.waitForAll()
         }
         
@@ -249,6 +244,7 @@ private extension DashboardViewModel {
         await withThrowingTaskGroup(of: Void.self) { [weak self] group in
             guard let self else { return }
             
+            /// USD accounts
             group.addTask {
                 do {
                     let result = try await self.context.getUSDAccountsUsecase.execute(page: self.accountPage.usd)
@@ -259,6 +255,7 @@ private extension DashboardViewModel {
                 }
             }
             
+            /// KHR accounts
             group.addTask {
                 do {
                     let result = try await self.context.getKHRAccountsUsecase.execute(page: self.accountPage.khr)
@@ -269,6 +266,7 @@ private extension DashboardViewModel {
                 }
             }
             
+            /// Banners
             group.addTask {
                 do {
                     let result = try await self.context.getBannersUsecase.execute()

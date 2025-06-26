@@ -80,6 +80,7 @@ class DashboardViewController: BaseViewController<DashboardViewModel> {
 private extension DashboardViewController {
     func makeSectionsSubscription() {
         viewModel.$sections
+            .first()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sections in
                 guard let self else { return }
@@ -147,7 +148,7 @@ private extension DashboardViewController {
             .dropFirst()
             .compactMap { $0 }
             .filter { !$0.isEmpty }
-            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(1), scheduler: DispatchQueue.main)
             .sink { [weak self] message in
                 self?.showErrorAlert(message: message)
             }.store(in: &cancellables)
