@@ -58,7 +58,6 @@ extension DashboardViewController {
         section.contentInsets = NSDirectionalEdgeInsets(
             top: .getSpacing(.xmedium), leading: 0,
             bottom: .getSpacing(.large) + 2, trailing: 0)
-        section.orthogonalScrollingBehavior = .none
         
         return section
     }

@@ -21,7 +21,7 @@ extension NotificationViewController {
         v.contentInsetAdjustmentBehavior = .never
         v.separatorStyle = .none
         v.dataSource = dataSource
-        v.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        v.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         v.delegate = self
         v.translatesAutoresizingMaskIntoConstraints = false
         

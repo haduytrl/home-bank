@@ -20,14 +20,14 @@ open class BaseViewModel {
     ///   - onError: A closure to run on the main thread if `task` throws, with the error’s message.
     public func executeMainTask(
         _ task: @escaping () async throws -> Void,
-        deferred: (() -> Void)? = nil,
-        onError: ((Error) async -> Void)? = nil
+        deferred: (@Sendable () -> Void)? = nil,
+        onError: (@Sendable (Error) async -> Void)? = nil
     ) {
         // Cancel any previous task
         mainTask?.cancel()
         
         // Launch a new Task
-        mainTask = Task {
+        mainTask = Task { @Sendable in
             defer {
                 if let deferred { deferred() }
             }

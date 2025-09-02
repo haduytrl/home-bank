@@ -91,8 +91,7 @@ final class BaseViewModelTests: XCTestCase {
         )
         
         // Then
-        await fulfillment(of: [secondTaskExpectation], timeout: 1.0)
-        await fulfillment(of: [firstTaskExpectation], timeout: 1.0)
+        await fulfillment(of: [firstTaskExpectation, secondTaskExpectation], timeout: 1.0)
         XCTAssertEqual(sut.testData, "Second task completed")
     }
     
