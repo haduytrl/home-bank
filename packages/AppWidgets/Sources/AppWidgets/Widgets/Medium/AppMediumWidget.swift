@@ -14,7 +14,11 @@ struct AppMediumWidgetEntryView : View {
                     .bold()
             }
         }
-        .background(Color.white)
+        .background(LinearGradient(
+            gradient: Gradient(colors: [Color(UIColor.green), Color(UIColor.gray5).opacity(0.4)]),
+            startPoint: .topLeading, endPoint: .bottomTrailing
+        ))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
